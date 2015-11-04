@@ -1,0 +1,22 @@
+{
+  "name": "random",
+  "main": "random.js",
+  "homepage": "https://github.com/ElemeFE/random",
+  "authors": [
+    "sofish <happinesz@gmail.com>"
+  ],
+  "description": "a better way to get carved up",
+  "moduleType": [],
+  "keywords": [
+    "random",
+    "didive"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

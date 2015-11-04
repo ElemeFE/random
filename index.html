@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en" class="borderbox">
+<head>
+  <meta charset="UTF-8">
+  <title>Random.js</title>
+  <link rel="stylesheet" href="http://typo.sofi.sh/typo.css">
+  <link rel="stylesheet" href="http://sofish.github.io/essage/src/essage.css"/>
+  <style>
+    body{max-width:980px;margin:60px auto;width:100%;padding:0 1em;}
+    :focus{outline:none;}
+    [contenteditable]:focus{outline:1px dotted #bbb;background:#f5f5f3;}
+    small{font-size:0.75em;display:block;margin:5px 0 10px;}
+    pre{border:none;outline:1px solid #ddd;font-size:12px;}
+    input[type="text"]{border:1px solid #ccc;height:36px;line-height:34px;padding:0 10px;}
+    label{display-inline:block;margin-right:20px;}
+    .female{color:deeppink;}
+    .male{color:deepskyblue;}
+  </style>
+</head>
+<body class="typo">
+
+<h2>1、分组参数</h2>
+<input type="text" placeholder="N"> <small>注：默认 N = 分成 N 组；如果选择区分性别，则 N = 每组多少人</small>
+<label><input type="checkbox" name="divideUnderMemberCount"> N = 每组人数</label>
+<label><input type="checkbox" name="isSexSensitive"> 区分性别</label>
+
+<h2>2、编辑团队数据 / JSON</h2>
+<p>打开 index.html，编辑 JS 中 <code>team</code> 这个变量</p>
+
+<h2>3、计算结果</h2>
+<table></table>
+
+<script src="http://sofish.github.io/essage/src/essage.js"></script>
+<script src="random.js"></script>
+<script>
+  var team = [{name: 'A', sex: 'male'}, {name: 'B', sex: 'female'}, {name: 'C', sex: 'female'},
+    {name: 'D', sex: 'female'}, {name: 'E', sex: 'male'}, {name: 'F', sex: 'female'},
+    {name: 'G', sex: 'male'}, {name: 'H', sex: 'male'}, {name: 'I', sex: 'male'},
+    {name: 'J', sex: 'male'}, {name: 'K', sex: 'male'}, {name: 'L', sex: 'male'},
+    {name: 'M', sex: 'male'}, {name: 'N', sex: 'male'}, {name: 'O', sex: 'female'},
+    {name: 'P', sex: 'female'}, {name: 'Q', sex: 'female'}, {name: 'R', sex: 'male'},
+    {name: 'S', sex: 'male'}, {name: 'T', sex: 'female'}, {name: 'U', sex: 'male'},
+    {name: 'V', sex: 'male'}, {name: 'W', sex: 'female'}, {name: 'X', sex: 'male'},
+    {name: 'Y', sex: 'female'}, {name: 'Z', sex: 'male'}];
+
+  var $ = document.querySelector.bind(document);
+  var n = $('[placeholder="N"]');
+  var sex = $('[name="isSexSensitive"]');
+  var count = $('[name="divideUnderMemberCount"]');
+  var table = $('table');
+
+  var arr = [team, n.value, sex.checked, count.checked];
+
+  n.addEventListener('keyup', function() {
+    table.innerHTML = '';
+
+    var size = +n.value.trim();
+    var message = '';
+
+    if(!size) return;
+    if(isNaN(size)) message = 'N 必须是数字';
+    if(size > team.length / 2) message = 'N 不能大于 team 人数的一半';
+    if(size < 2) message = '至少分两组，或者至少每组两人';
+    if(message) return Essage.show({ status: 'warning', message: message }, 2000);
+
+    arr[1] = size;
+    row(random.apply(null, arr));
+  });
+
+  sex.addEventListener('change', function() {
+    arr[2] = sex.checked;
+    row(random.apply(null, arr));
+  });
+
+  count.addEventListener('change', function() {
+    arr[3] = count.checked;
+    console.log(arr);
+    row(random.apply(null, arr));
+  });
+
+  function row(group) {
+    table.innerHTML = '';
+    group.forEach(function(team) {
+      var row = table.insertRow(-1);
+      row.insertCell(0).innerHTML = table.rows.length;
+      team.forEach(function(p) {
+        p && (row.insertCell(-1).innerHTML = p.name + '<small class="' + p.sex + '">' + p.sex[0].toUpperCase() + '<small>');
+      });
+    });
+  };
+</script>
+</body>
+</html>
