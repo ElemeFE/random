@@ -13,11 +13,38 @@ var all = [
 ];
 
 var size = +process.argv[2] || 2;
-var isSexSensitive = process.argv[3];
-var isForceSizeAsMemberCountInGroup = process.argv[4]
+var isSexSensitive = process.argv[3] === 'true' ? true : false;
+var isForceSizeAsMemberCountInGroup = process.argv[4] === 'true' ?  true : false;
+var colors = {
+  female: '\u001b[31m',
+  male: '\u001b[34m',
+  reset: '\u001b[39m'
+};
 
-console.log('- 结果:')
-console.log('-', random(all, size, isSexSensitive, isForceSizeAsMemberCountInGroup));
+function printATeam(team, isSexSensitive, num) {
+  var str = '| ';
+  team.forEach(function (person, i) {
+    var tmp;
+    tmp = person.name;
+    if (isSexSensitive) {
+      tmp = colors[person.sex] + tmp + colors['reset'];
+    }
+    str += tmp + ' | ';
+    if (num && i % num === num - 1) str += '\n';
+  });
+  console.log(str);
+}
+
+console.log('- Before:')
+printATeam(all, true);
+
+console.log('\n- 结果:')
+var result = random(all, size, isSexSensitive, isForceSizeAsMemberCountInGroup);
+
+result.forEach(function (group, i) {
+  console.log('\n== Group ' + (i+1) + ' ==\n');
+  printATeam(group, true);
+});
 
 console.log();
 console.log('- Usage: 默认 size 为组的数量，可以强制为每组的人数')
