@@ -1,12 +1,12 @@
 var random = require('./random');
 
 var all = [
-  {name: 'A', sex: 'male'}, {name: 'B', sex: 'female'}, {name: 'C', sex: 'female'},
-  {name: 'D', sex: 'female'}, {name: 'E', sex: 'male'}, {name: 'F', sex: 'female'},
+  {name: 'A', sex: 'male'}, {name: 'B', sex: 'male'}, {name: 'C', sex: 'female'},
+  {name: 'D', sex: 'male'}, {name: 'E', sex: 'male'}, {name: 'F', sex: 'male'},
   {name: 'G', sex: 'male'}, {name: 'H', sex: 'male'}, {name: 'I', sex: 'male'},
   {name: 'J', sex: 'male'}, {name: 'K', sex: 'male'}, {name: 'L', sex: 'male'},
-  {name: 'M', sex: 'male'}, {name: 'N', sex: 'male'}, {name: 'O', sex: 'female'},
-  {name: 'P', sex: 'female'}, {name: 'Q', sex: 'female'}, {name: 'R', sex: 'male'},
+  {name: 'M', sex: 'male'}, {name: 'N', sex: 'male'}, {name: 'O', sex: 'male'},
+  {name: 'P', sex: 'male'}, {name: 'Q', sex: 'female'}, {name: 'R', sex: 'male'},
   {name: 'S', sex: 'male'}, {name: 'T', sex: 'female'}, {name: 'U', sex: 'male'},
   {name: 'V', sex: 'male'}, {name: 'W', sex: 'female'}, {name: 'X', sex: 'male'},
   {name: 'Y', sex: 'female'}, {name: 'Z', sex: 'male'}

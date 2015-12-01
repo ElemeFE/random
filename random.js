@@ -28,7 +28,7 @@ var random = function() {
     var females = loop(female, size);
     var males = loop(male, size).reverse();
 
-    if(females.length - males.length > 0) females = [males, males = females][0];
+    if(females.length - males.length < 0) females = [males, males = females][0];
     return females.map(function(group, i) {
       return group.concat(males[i] || []);
     });
